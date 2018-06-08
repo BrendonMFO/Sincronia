@@ -1,0 +1,33 @@
+#========================================================================
+# Brendon Mike Feliciano de Oliveira - 528489
+#========================================================================
+
+## Instruções para configuração
+
+    - Para definir com o ip do servidor altere o Ip na variavel IP_SERVER no arquivo Makefile
+
+## Instruções para a compilação
+
+    1º - Instalação dos pré-requisitos ALLEGRO
+
+        - sudo apt-get install build-essential subversion cmake xorg-dev libgl1-mesa-dev libglu-dev
+        - sudo apt-get install libpng-dev libcurl4-nss-dev libfreetype6-dev  libjpeg-dev libvorbis-dev libopenal-dev libphysfs-dev libgtk2.0-dev libpulse-dev libflac-dev libdumb1-dev
+
+    2º - Instalação da biblioteca ALLEGRO
+
+        - A biblioteca ALLEGRO encontra-se dentro da pasta lib, compactada
+        - Caso necessario link para o download da biblioteca -> https://github.com/liballeg/allegro5/releases/5.2.4.0/
+        - Apos a descompactação segue os passos para Instalação
+
+            - cd allegro-5.2.4.0/
+            - mkdir build
+            - cd build
+            - cmake ..
+            - make
+            - sudo make install
+
+    3º - Compilar Jogo
+
+        - Apos a instalação da biblioteca ALLEGRO, para compilar o jogo rode o comando a seguir na raiz do projeto
+
+            - make
