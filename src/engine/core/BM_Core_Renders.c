@@ -1,3 +1,7 @@
+//========================================================================
+// Brendon Mike Feliciano de Oliveira - 528489
+//========================================================================
+
 #include "BM_Recursos.h"
 #include "BM_Utils.h"
 #include "BM_Core_Renders.h"

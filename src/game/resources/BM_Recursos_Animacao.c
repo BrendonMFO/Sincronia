@@ -1,3 +1,6 @@
+//======================================================================
+// Brendon Mike Feliciano de Oliveira - 528489
+//======================================================================
 
 #include "BM_Recursos_Animacao.h"
 #include "BM_Allegro_eventos.h"

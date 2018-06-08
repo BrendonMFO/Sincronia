@@ -1,3 +1,7 @@
+//========================================================================
+// Brendon Mike Feliciano de Oliveira - 528489
+//========================================================================
+
 #include "BM_Render.h"
 #include "BM_Eventos.h"
 #include "BM_Communication_Send.h"

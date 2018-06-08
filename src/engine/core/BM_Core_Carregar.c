@@ -1,3 +1,7 @@
+//========================================================================
+// Brendon Mike Feliciano de Oliveira - 528489
+//========================================================================
+
 #include "BM_Socket.h"
 #include "BM_Core_Renders.h"
 #include "BM_Core_Carregar.h"

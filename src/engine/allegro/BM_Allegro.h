@@ -1,4 +1,8 @@
-﻿#ifndef _BM_ALLEGRO_
+﻿//========================================================================
+// Brendon Mike Feliciano de Oliveira - 528489
+//========================================================================
+
+#ifndef _BM_ALLEGRO_
 #define _BM_ALLEGRO_
 
 #include <allegro5/allegro.h>

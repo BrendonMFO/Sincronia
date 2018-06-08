@@ -1,3 +1,7 @@
+//========================================================================
+// Brendon Mike Feliciano de Oliveira - 528489
+//========================================================================
+
 #include "BM_Elemento.h"
 #include "BM_Recursos.h"
 #include "BM_Allegro_eventos_mouse.h"

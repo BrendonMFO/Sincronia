@@ -1,3 +1,7 @@
+//======================================================================
+// Brendon Mike Feliciano de Oliveira - 528489
+//======================================================================
+
 #include "BM_Allegro_janela.h"
 #include "BM_Allegro_Imagens.h"
 #include "BM_Core_Carregar.h"

@@ -1,3 +1,7 @@
+//======================================================================
+// Brendon Mike Feliciano de Oliveira - 528489
+//======================================================================
+
 #ifndef _BM_RESOURCES_ANIMACAO_
 #define _BM_RESOURCES_ANIMACAO_
 

@@ -1,3 +1,7 @@
+//========================================================================
+// Brendon Mike Feliciano de Oliveira - 528489
+//========================================================================
+
 #include <stdlib.h>
 #include "BM_Allegro.h"
 #include "BM_Socket_events.h"

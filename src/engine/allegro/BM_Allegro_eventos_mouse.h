@@ -1,3 +1,7 @@
+//========================================================================
+// Brendon Mike Feliciano de Oliveira - 528489
+//========================================================================
+
 #ifndef _BM_ALLEGRO_EVENTOS_MOUSE_
 #define _BM_ALLEGRO_EVENTOS_MOUSE_
 

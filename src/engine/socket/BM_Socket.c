@@ -1,3 +1,7 @@
+//========================================================================
+// Brendon Mike Feliciano de Oliveira - 528489
+//========================================================================
+
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -10,6 +14,10 @@
 
 #ifndef PORT
 #define PORT 4080
+#endif
+
+#ifndef IP_SERVER
+#define IP_SERVER "127.0.0.1"
 #endif
 
 void BM_Socket_init();
@@ -78,7 +86,7 @@ void BM_Socket_init()
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_port = htons(PORT);
 
-    if (inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr) <= 0)
+    if (inet_pton(AF_INET, IP_SERVER, &serv_addr.sin_addr) <= 0)
     {
         printf("Invalid address/ Address not supported\n");
         exit(EXIT_FAILURE);
