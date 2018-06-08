@@ -24,14 +24,14 @@ int main(int argc, char *argv[])
 	{
 		largura = 1280;
 		altura = 720;
-		flag = FALSE;
+		flag = 0;
 	}
 	BM_Janela_setar_dados(largura, altura);
 
 	//==========================================================================
 	// Carregar dados
 	//==========================================================================
-	if (BM_CORE_carregar(janela) == ERRO)
+	if (BM_Core_carregar(janela) == 0)
 	{
 		getchar();
 		return -1;
@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
 	//==========================================================================
 	// Criar e configurar janela
 	//==========================================================================
-	if (flag == TRUE)
+	if (flag == 1)
 		al_set_new_display_flags(ALLEGRO_FULLSCREEN);
 	BM_Allegro_criar_janela(&janela, largura, altura);
 	BM_Eventos_iniciar(janela);
@@ -54,8 +54,8 @@ int main(int argc, char *argv[])
 	//==========================================================================
 	// Finalizar jogo
 	//==========================================================================
-	al_destroy_display(janela);
 	BM_Recursos_destruir();
+	al_destroy_display(janela);
 
 	return 0;
 }
