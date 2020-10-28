@@ -80,7 +80,7 @@ void BM_Socket_events_pop(int type, void (*callback)(player_message_t *))
                 callback_list.last = communication_callback->prev;
             }
         }
-        free(callback);
+        free(communication_callback);
     }
 
     al_unlock_mutex(sem_var);

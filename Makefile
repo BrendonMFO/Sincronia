@@ -1,4 +1,4 @@
-IP_SERVER="172.18.0.12"
+IP_SERVER="172.18.0.6"
 
 #=====================================================================
 # Color
@@ -23,7 +23,7 @@ CFLAGS = -DIP_SERVER='$(IP_SERVER)'
 # Init
 #=====================================================================
 all: pre_init init engine game clean copy_statics exec clean_libs
-	$(info ) $(call colorecho,3,"Sucess..." ) 
+	$(info ) $(call colorecho,3,"Success..." ) 
 
 pre_init:
 	$(call colorecho,3,"Sincronia" ) $(info ) 
