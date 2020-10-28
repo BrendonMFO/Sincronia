@@ -1,28 +1,13 @@
-//========================================================================
-// Brendon Mike Feliciano de Oliveira - 528489
-//========================================================================
-
 #ifndef _BM_MAIN_
 #define _BM_MAIN_
 
 #include "BM_Campo.h"
-#include "BM_Allegro.h"
+#include "bm_allegro.h"
 
-//==========================================================================
-// Constantes
-//==========================================================================
-#define FPS 30
+#define FPS 60
 
-//==========================================================================
-// Loop principal do jogo
-//==========================================================================
 void BM_Loop();
 
-/**
- * @brief 
- * - Função que é chamada quando a engine terminar o carregamento 
- */
 void BM_Core_Evento_inicial();
-
 
 #endif

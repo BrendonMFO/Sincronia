@@ -1,65 +1,45 @@
-//======================================================================
-// Brendon Mike Feliciano de Oliveira - 528489
-//======================================================================
-
-#include "BM_Allegro_janela.h"
-#include "BM_Allegro_Imagens.h"
 #include "BM_Core_Carregar.h"
+#include "bm_display.h"
+#include "bm_allegro_bitmap.h"
 #include "BM_Core_Loop_principal.h"
 
 int main(int argc, char *argv[])
 {
-	//==========================================================================
-	// Variaveis
-	//==========================================================================
-	ALLEGRO_DISPLAY *janela = NULL;
-	int largura, altura, flag;
+  ALLEGRO_DISPLAY *janela = NULL;
+  int width, height, flag;
 
-	//==========================================================================
-	// Definir janela
-	//==========================================================================
-	if (argc == 4)
-	{
-		sscanf(argv[1], "%d", &largura);
-		sscanf(argv[2], "%d", &altura);
-		sscanf(argv[3], "%d", &flag);
-	}
-	else
-	{
-		largura = 1280;
-		altura = 720;
-		flag = 0;
-	}
-	BM_Janela_setar_dados(largura, altura);
+  if (argc == 4)
+  {
+    sscanf(argv[1], "%d", &width);
+    sscanf(argv[2], "%d", &height);
+    sscanf(argv[3], "%d", &flag);
+  }
+  else
+  {
+    width = 600;
+    height = 480;
+    flag = 0;
+  }
+  bm_display_init(width, height);
 
-	//==========================================================================
-	// Carregar dados
-	//==========================================================================
-	if (BM_Core_carregar(janela) == 0)
-	{
-		getchar();
-		return -1;
-	}
+  if (BM_Core_carregar(janela) == 0)
+  {
+    getchar();
+    return -1;
+  }
 
-	//==========================================================================
-	// Criar e configurar janela
-	//==========================================================================
-	if (flag == 1)
-		al_set_new_display_flags(ALLEGRO_FULLSCREEN);
-	BM_Allegro_criar_janela(&janela, largura, altura);
-	BM_Eventos_iniciar(janela);
-	al_clear_to_color(al_map_rgb(255, 255, 255));
+  if (flag == 1)
+  {
+    al_set_new_display_flags(ALLEGRO_FULLSCREEN);
+  }
+  bm_al_create_display(&janela, width, height);
+  bm_al_events_init(janela);
+  al_clear_to_color(al_map_rgb(255, 255, 255));
 
-	//==========================================================================
-	// Loop principal
-	//==========================================================================
-	BM_Loop(janela);
+  BM_Loop(janela);
 
-	//==========================================================================
-	// Finalizar jogo
-	//==========================================================================
-	BM_Recursos_destruir();
-	al_destroy_display(janela);
+  BM_Recursos_destruir();
+  al_destroy_display(janela);
 
-	return 0;
+  return 0;
 }

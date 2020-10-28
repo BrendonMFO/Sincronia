@@ -1,25 +1,10 @@
-//========================================================================
-// Brendon Mike Feliciano de Oliveira - 528489
-//========================================================================
-
 #include <stdlib.h>
-#include "BM_Allegro.h"
+#include "bm_allegro.h"
 #include "BM_Socket_events.h"
 
-/**
- * @brief 
- */
+static ALLEGRO_MUTEX *sem_var;
 static communication_callback_list_t callback_list;
 
-/**
- * @brief 
- */
-ALLEGRO_MUTEX *sem_var;
-
-/**
- * @brief 
- * 
- */
 void BM_Socket_events_init()
 {
     callback_list.first = NULL;
@@ -27,13 +12,7 @@ void BM_Socket_events_init()
     sem_var = al_create_mutex();
 }
 
-/**
- * @brief 
- * 
- * @param type 
- * @param funcao 
- */
-void BM_Socket_events_push(int type, void (*funcao)(player_message_t *))
+void BM_Socket_events_push(int type, void (*callback)(player_message_t *))
 {
     communication_callback_t *new_callback = (communication_callback_t *)malloc(sizeof(communication_callback_t));
     if (new_callback == NULL)
@@ -41,7 +20,7 @@ void BM_Socket_events_push(int type, void (*funcao)(player_message_t *))
         exit(EXIT_FAILURE);
     }
     new_callback->type = type;
-    new_callback->funcao = funcao;
+    new_callback->callback = callback;
 
     al_lock_mutex(sem_var);
     if (callback_list.first == NULL && callback_list.last == NULL)
@@ -60,49 +39,45 @@ void BM_Socket_events_push(int type, void (*funcao)(player_message_t *))
     al_unlock_mutex(sem_var);
 }
 
-/**
- * @brief 
- * 
- */
-void BM_Socket_events_pop(int type, void (*funcao)(player_message_t *))
+void BM_Socket_events_pop(int type, void (*callback)(player_message_t *))
 {
-    communication_callback_t *callback;
+    communication_callback_t *communication_callback;
 
     al_lock_mutex(sem_var);
 
-    for (callback = callback_list.first; callback != NULL; callback = callback->next)
+    for (communication_callback = callback_list.first; communication_callback != NULL; communication_callback = communication_callback->next)
     {
-        if (callback->funcao == funcao && callback->type == type)
+        if (communication_callback->callback == callback && communication_callback->type == type)
         {
             break;
         }
     }
 
-    if (callback != NULL)
+    if (communication_callback != NULL)
     {
-        if (callback_list.first == callback && callback_list.last == callback)
+        if (callback_list.first == communication_callback && callback_list.last == communication_callback)
         {
             callback_list.first = NULL;
             callback_list.last = NULL;
         }
         else
         {
-            if (callback->prev != NULL)
+            if (communication_callback->prev != NULL)
             {
-                callback->prev->next = callback->next;
+                communication_callback->prev->next = communication_callback->next;
             }
             else
             {
-                callback_list.first = callback->next;
+                callback_list.first = communication_callback->next;
             }
 
-            if (callback->next != NULL)
+            if (communication_callback->next != NULL)
             {
-                callback->next->prev = callback->prev;
+                communication_callback->next->prev = communication_callback->prev;
             }
             else
             {
-                callback_list.last = callback->prev;
+                callback_list.last = communication_callback->prev;
             }
         }
         free(callback);
@@ -111,12 +86,6 @@ void BM_Socket_events_pop(int type, void (*funcao)(player_message_t *))
     al_unlock_mutex(sem_var);
 }
 
-/**
- * @brief 
- * 
- * @param type 
- * @param message 
- */
 void BM_Socket_events_call(int type, player_message_t *message)
 {
     communication_callback_t *callback;
@@ -124,7 +93,7 @@ void BM_Socket_events_call(int type, player_message_t *message)
     {
         if (callback->type == type)
         {
-            callback->funcao(message);
+            callback->callback(message);
         }
     }
 }

@@ -1,15 +1,12 @@
-#=====================================================================
-# Definições
-#=====================================================================
-IP_SERVER="127.0.0.1"
+IP_SERVER="172.18.0.12"
 
 #=====================================================================
-# Definir cor
+# Color
 #=====================================================================
 define colorecho
-      @tput setaf $1
-      @echo $2
-      @tput sgr0
+	@tput setaf $1
+	@echo $2
+	@tput sgr0
 endef
 
 #=====================================================================
@@ -23,20 +20,23 @@ LIBS = -L./build -lbm_engine -lbm_game
 CFLAGS = -DIP_SERVER='$(IP_SERVER)'
 
 #=====================================================================
-# Iniciar compilacao
+# Init
 #=====================================================================
-all: init engine game clean copy_statics exec clean_libs
-	$(info ) $(call colorecho,3,"Compilação finalizada com sucesso..." ) 
+all: pre_init init engine game clean copy_statics exec clean_libs
+	$(info ) $(call colorecho,3,"Sucess..." ) 
+
+pre_init:
+	$(call colorecho,3,"Sincronia" ) $(info ) 
+	rm -rf ./build
 
 init: 
-	$(call colorecho,3,"Trabalho Gerencia de Redes - Brendon Oliveira" ) $(info )
 	@mkdir -p build
 
 #=====================================================================
-# Compilar executavel
+# Compile 
 #=====================================================================
 exec: 
-	$(call colorecho,6,"Compilando..." ) $(info )
+	$(call colorecho,6,"Compiling..." ) $(info )
 	gcc -Wall -o ./build/sincronia ./src/main.c $(INCLUDES) $(LIBS) $(ALLEGRO)
 
 #=====================================================================
@@ -45,11 +45,11 @@ exec:
 engine: lib_engine
 
 lib_engine: compile_engine
-	$(call colorecho,6,"ENGINE -> [2] - Criando biblioteca" )	$(info )
+	$(call colorecho,6,"ENGINE -> [2] - Building Lib" )	$(info )
 	ar rvs ./build/libbm_engine.a *.o
 
 compile_engine:
-	$(call colorecho,6,"ENGINE -> [1] - Compilando fontes da engine" ) $(info )
+	$(call colorecho,6,"ENGINE -> [1] - Compiling engine source" ) $(info )
 	gcc $(CFLAGS) -Wall -c ./src/engine/**/*.c $(INCLUDES)
 
 #=====================================================================
@@ -58,11 +58,11 @@ compile_engine:
 game: lib_game
 
 lib_game: compile_game
-	$(call colorecho,6,"GAME -> [2] - Criando biblioteca" ) $(info )
+	$(call colorecho,6,"GAME -> [2] - Building Lib" ) $(info )
 	ar rvs ./build/libbm_game.a *.o
 
 compile_game:
-	$(call colorecho,6,"GAME -> [1] - Compilando fontes do game" ) $(info )
+	$(call colorecho,6,"GAME -> [1] - Compiling game source" ) $(info )
 	gcc -Wall -Wno-format-extra-args -c ./src/game/**/*.c $(INCLUDES)
 
 #=====================================================================
@@ -75,6 +75,5 @@ clean_libs:
 	@rm -f ./build/*.a
 
 copy_statics:
-	$(call colorecho,6,"Copiando arquivos estaticos" ) $(info )
-
+	$(call colorecho,6,"Copying static files" ) $(info )
 	cp -a ./public ./build/Recursos
