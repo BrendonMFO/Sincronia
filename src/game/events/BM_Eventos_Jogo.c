@@ -4,7 +4,7 @@
 #include "BM_Eventos.h"
 #include "BM_Rodadas.h"
 #include "BM_Oponente.h"
-#include "BM_Core_Eventos.h"
+#include "bm_core_events.h"
 #include "bm_allegro_main_events.h"
 
 void BM_Eventos_Jogo_reiniciar();
@@ -17,7 +17,7 @@ void BM_Eventos_Jogo_registrar()
 {
   BM_Eventos_Jogo_Executando();
   bm_events_add_callback(BM_Eventos_Jogo_verificar_fim, NULL);
-  BM_Render_adicionar_funcao(BM_Render_rodada, NULL);
+  bm_render_add_callback(BM_Render_rodada, NULL);
 }
 
 void BM_Eventos_Jogo_eventos(ALLEGRO_EVENT event, void *_parameter)
@@ -39,7 +39,7 @@ void BM_Eventos_Jogo_verificar_fim(ALLEGRO_EVENT event, void *_parameter)
       BM_Player_getJogador()->quantidadeTerritorio == 0 ||
       BM_Player_getOpponentPlayer()->quantidadeTerritorio == 0)
   {
-    BM_Render_adicionar_funcao(BM_Render_resultado, NULL);
+    bm_render_add_callback(BM_Render_resultado, NULL);
     bm_events_add_callback(BM_Eventos_Jogo_eventos, NULL);
     bm_events_remove_callback(BM_Eventos_Jogo_verificar_fim);
     executando = 0;
@@ -58,8 +58,8 @@ void BM_Eventos_Jogo_Executando()
 void BM_Eventos_Jogo_reiniciar()
 {
   BM_Campo_redefinir();
-  BM_Oponente_iniciar_valores(BM_Campo_getCampo()->quantidade - 1);
+  BM_Oponente_iniciar_valores(bm_field_get()->quantidade - 1);
   bm_events_remove_callback(BM_Eventos_Jogo_eventos);
-  BM_Render_remover_funcao(BM_Render_resultado);
+  bm_render_remove_callback(BM_Render_resultado);
   BM_Eventos_Jogo_registrar();
 }

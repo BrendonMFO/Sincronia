@@ -2,11 +2,11 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
-#include "BM_Socket.h"
+#include "bm_socket.h"
 #include <arpa/inet.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include "BM_Socket_events.h"
+#include "bm_socket_events.h"
 
 #ifndef PORT
 #define PORT 4080
@@ -19,11 +19,11 @@
 static int sock;
 static struct sockaddr_in serv_addr;
 
-void BM_Socket_init();
+void bm_socket_init();
 
-void BM_Socket_connect()
+void bm_socket_connect()
 {
-  BM_Socket_init();
+  bm_socket_init();
   if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
   {
     printf("Connection Failed \n");
@@ -31,19 +31,19 @@ void BM_Socket_connect()
   }
 }
 
-void BM_Socket_send(player_message_t *msg)
+void bm_socket_send(player_message_t *msg)
 {
   send(sock, msg, sizeof(player_message_t), 0);
 }
 
-void BM_Socket_receive()
+void bm_socket_receive()
 {
   player_message_t *msg = (player_message_t *)malloc(sizeof(player_message_t));
   read(sock, msg, sizeof(player_message_t));
-  BM_Socket_events_call(msg->type, msg);
+  bm_socket_events_call(msg->type, msg);
 }
 
-void BM_Socket_init()
+void bm_socket_init()
 {
   if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
   {

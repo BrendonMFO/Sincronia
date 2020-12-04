@@ -3,7 +3,7 @@
 #include "BM_Eventos.h"
 #include "BM_Hexagono.h"
 #include "BM_Oponente.h"
-#include "BM_Core_Eventos.h"
+#include "bm_core_events.h"
 #include "bm_allegro_main_events.h"
 #include "BM_Communication_Send.h"
 #include "bm_allegro_mouse_callback_queue.h"
@@ -12,9 +12,9 @@
 void BM_Eventos_Jogador_Alvo_voltar();
 void BM_Eventos_Jogador_Alvo_empate();
 void BM_Eventos_Jogador_Alvo_click(int, int);
+void BM_Evento_Jogador_Alvo(ALLEGRO_EVENT, void *);
 void BM_Eventos_Jogador_Alvo_vitoria_ataque(BM_HEXAGONO *);
 void BM_Eventos_Jogador_Alvo_vitoria_defesa(BM_HEXAGONO *);
-void BM_Evento_Jogador_Alvo(ALLEGRO_EVENT, void *);
 
 void BM_Evento_Jogador_alvo_registrar()
 {
@@ -113,5 +113,5 @@ void BM_Eventos_Jogador_Alvo_vitoria_defesa(BM_HEXAGONO *hexagonoClick)
 
   BM_Player_getOpponentPlayer()->quantidadeTerritorio++;
 
-  BM_Campo_getCampo()->hexagonos[BM_Player_getJogador()->hexagonoAtual].estado = ADVERSARIO;
+  bm_field_get()->hexagonos[BM_Player_getJogador()->hexagonoAtual].estado = ADVERSARIO;
 }

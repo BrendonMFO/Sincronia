@@ -3,9 +3,9 @@
 #include "BM_Render.h"
 #include "BM_Eventos.h"
 #include "BM_Oponente.h"
-#include "BM_Core_Eventos.h"
-#include "bm_allegro_main_events.h"
+#include "bm_core_events.h"
 #include "BM_Communication_Send.h"
+#include "bm_allegro_main_events.h"
 
 void BM_Evento_jogador_atacar();
 void BM_Evento_jogador_reiniciar();
@@ -44,7 +44,7 @@ void BM_Evento_jogador(ALLEGRO_EVENT event, void *_parameter)
 
 void BM_Evento_jogador_atacar()
 {
-  if (BM_Campo_getCampo()->hexagonos[BM_Player_getJogador()->hexagonoAtual].estado == JOGADOR)
+  if (bm_field_get()->hexagonos[BM_Player_getJogador()->hexagonoAtual].estado == JOGADOR)
   {
     if (BM_Hexagono_marcar_alvos(BM_Player_getJogador()->hexagonoAtual, HEXAGONO_ALVO) > 0)
     {
@@ -58,19 +58,19 @@ void BM_Evento_jogador_atacar()
 
 void BM_Evento_jogador_conquistar()
 {
-  if (BM_Campo_getCampo()->hexagonos[BM_Player_getJogador()->hexagonoAtual].estado != ADVERSARIO)
+  if (bm_field_get()->hexagonos[BM_Player_getJogador()->hexagonoAtual].estado != ADVERSARIO)
   {
     BM_Elemento_adicionar_mouse_listener();
     bm_events_remove_callback(BM_Evento_jogador);
     BM_Evento_Jogador_Escolha_registrar();
-    BM_Render_adicionar_funcao(BM_Render_elementos, NULL);
+    bm_render_add_callback(BM_Render_elementos, NULL);
   }
 }
 
 void BM_Evento_jogador_reiniciar()
 {
   bm_events_remove_callback(BM_Evento_jogador);
-  BM_Render_remover_funcao(BM_Render_rodada);
+  bm_render_remove_callback(BM_Render_rodada);
 }
 
 void BM_Evento_jogador_mouse_mover(int x, int y)

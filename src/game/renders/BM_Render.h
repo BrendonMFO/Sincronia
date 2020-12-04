@@ -1,7 +1,7 @@
 #ifndef _BM_RENDERS_
 #define _BM_RENDERS_
 
-#include "BM_Core_Renders.h"
+#include "bm_core_render.h"
 
 void BM_Render_campo();
 

@@ -1,7 +1,7 @@
 #ifndef __BM_SOCKET_EVENTS__
 #define __BM_SOCKET_EVENTS__
 
-#include "BM_Socket.h"
+#include "bm_socket.h"
 
 typedef struct s_communication_callback
 {
@@ -17,12 +17,12 @@ typedef struct s_communication_callback_list
   communication_callback_t *last;
 } communication_callback_list_t;
 
-void BM_Socket_events_init();
+void bm_socket_events_init();
 
-void BM_Socket_events_push(int type, void (*callback)(player_message_t *));
+void bm_socket_events_push(int type, void (*callback)(player_message_t *));
 
-void BM_Socket_events_pop(int type, void (*callback)(player_message_t *));
+void bm_socket_events_pop(int type, void (*callback)(player_message_t *));
 
-void BM_Socket_events_call(int type, player_message_t *message);
+void bm_socket_events_call(int type, player_message_t *message);
 
 #endif

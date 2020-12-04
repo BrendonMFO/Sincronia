@@ -13,7 +13,7 @@ BM_ANIMACAO_FILA *BM_Animacao_obter_fila()
   return animacoes;
 }
 
-int BM_Animacao_iniciar_fila()
+int bm_animation_init_queue()
 {
   animacoes = (BM_ANIMACAO_FILA *)malloc(1 * sizeof(BM_ANIMACAO_FILA));
   if (animacoes == NULL)
@@ -44,7 +44,7 @@ int BM_Animacao_adicionar(BM_SPRITES *_sprite, int _renderW, int _renderH, int _
   aux->finalizado = 2;
   aux->render = 2;
   aux->previous = NULL;
-  aux->tempoAtualizacao = (_tempo / (aux->sprite->imagem->columns * aux->sprite->imagem->lines)) * 100;
+  aux->tempoAtualizacao = (_tempo / (aux->sprite->image->columns * aux->sprite->image->lines)) * 100;
   aux->tempoAtual = 0;
   if (animacoes->first == NULL)
   {
@@ -102,11 +102,11 @@ void BM_Animacao_avancar(BM_ANIMACAO *_animacao)
   if (_animacao != NULL)
   {
     _animacao->frameAtualColuna++;
-    if (_animacao->frameAtualColuna > _animacao->sprite->imagem->columns - 1)
+    if (_animacao->frameAtualColuna > _animacao->sprite->image->columns - 1)
     {
       _animacao->frameAtualLinha++;
       _animacao->frameAtualColuna = 0;
-      if (_animacao->frameAtualLinha > _animacao->sprite->imagem->lines - 1)
+      if (_animacao->frameAtualLinha > _animacao->sprite->image->lines - 1)
       {
         _animacao->finalizado = 1;
         _animacao->frameAtualLinha = 0;

@@ -5,7 +5,7 @@
 #include "BM_Rodadas.h"
 #include "BM_Hexagono.h"
 #include "BM_Oponente.h"
-#include "BM_Core_Eventos.h"
+#include "bm_core_events.h"
 #include "bm_allegro_main_events.h"
 #include "BM_Communication_Send.h"
 #include "bm_allegro_mouse_callback_queue.h"
@@ -37,7 +37,7 @@ void BM_Evento_Jogador_Escolha(ALLEGRO_EVENT event, void *_parameter)
 
 void BM_Eventos_Jogador_Escolha_mouse(int x, int y)
 {
-  BM_Campo *campo = BM_Campo_getCampo();
+  BM_Campo *campo = bm_field_get();
   BM_ALLEGRO_MOUSE_CALLBACK *mouse = bm_al_mouse_callback_queue_process(x, y);
 
   if (mouse == NULL)
@@ -64,7 +64,7 @@ void BM_Eventos_Jogador_Escolha_mouse(int x, int y)
   campo->hexagonos[BM_Player_getJogador()->hexagonoAtual].elemento = elemento;
   campo->hexagonos[BM_Player_getJogador()->hexagonoAtual].estado = JOGADOR;
 
-  BM_Render_remover_funcao(BM_Render_elementos);
+  bm_render_remove_callback(BM_Render_elementos);
 
   BM_Communication_Send_capture_hexagon(BM_Player_getJogador()->hexagonoAtual, elemento);
 
@@ -79,5 +79,5 @@ void BM_Eventos_Jogador_Escolha_retornar()
 
   BM_Evento_Jogador_registrar();
 
-  BM_Render_remover_funcao(BM_Render_elementos);
+  bm_render_remove_callback(BM_Render_elementos);
 }

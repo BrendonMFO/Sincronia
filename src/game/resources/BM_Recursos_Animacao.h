@@ -28,7 +28,7 @@ typedef struct BM_ANIMACAO_FILA_S
 
 BM_ANIMACAO_FILA *BM_Animacao_obter_fila();
 
-int BM_Animacao_iniciar_fila();
+int bm_animation_init_queue();
 
 int BM_Animacao_adicionar(BM_SPRITES *_sprite, int _renderW, int _renderH, int _renderX, int _renderY, double _tempo);
 

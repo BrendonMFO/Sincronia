@@ -2,11 +2,11 @@
 #include "BM_Campo.h"
 #include "BM_Player.h"
 #include "bm_allegro.h"
+#include "bm_display.h"
 #include "BM_Hexagono.h"
 #include "BM_Recursos.h"
 #include "BM_Elemento.h"
 #include "BM_Oponente.h"
-#include "bm_display.h"
 #include "BM_Recursos_Animacao.h"
 #include "bm_allegro_mouse_callback_queue.h"
 
@@ -39,7 +39,7 @@ BM_HEXAGONO BM_Hexagono_criar(int _id, int _estado, int _elemento)
 
 void BM_Hexagono_alterar(int _hexagono_id, int _estado, int _elemento)
 {
-  BM_Campo *campo = BM_Campo_getCampo();
+  BM_Campo *campo = bm_field_get();
   campo->hexagonos[_hexagono_id].estado = _estado;
   campo->hexagonos[_hexagono_id].elemento = _elemento;
 }
@@ -47,7 +47,7 @@ void BM_Hexagono_alterar(int _hexagono_id, int _estado, int _elemento)
 int BM_Hexagono_batalha(int _alvo, int _atacante, int _playerAtaque, int _playerDefesa)
 {
   int resultadoAtaque = 0, resultadoDefesa = 0;
-  BM_Campo *campo = BM_Campo_getCampo();
+  BM_Campo *campo = bm_field_get();
   BM_HEXAGONO *hexagonoAtaque, *hexagonoDefesa;
 
   hexagonoAtaque = &campo->hexagonos[_atacante];
@@ -85,7 +85,7 @@ int BM_Hexagono_batalha(int _alvo, int _atacante, int _playerAtaque, int _player
 
 int BM_Hexagono_marcar_alvos(int _centro, int _acao)
 {
-  BM_Campo *campo = BM_Campo_getCampo();
+  BM_Campo *campo = bm_field_get();
   BM_HEXAGONO hexagono = campo->hexagonos[_centro], *aux;
   int i, contador = 0;
   for (i = 0; i < 6; i++)
@@ -107,7 +107,7 @@ int BM_Hexagono_marcar_alvos(int _centro, int _acao)
 void BM_Hexagono_marcar_sincronia(int _player)
 {
   int i;
-  BM_Campo *campo = BM_Campo_getCampo();
+  BM_Campo *campo = bm_field_get();
   BM_HEXAGONO hexagono, *aux;
 
   hexagono = _player == JOGADOR
@@ -144,7 +144,7 @@ void BM_Hexagono_marcar_sincronia(int _player)
 void BM_Hexagono_desmarcar_sincronia(int _player)
 {
   int i;
-  BM_Campo *campo = BM_Campo_getCampo();
+  BM_Campo *campo = bm_field_get();
   BM_HEXAGONO hexagono, *aux;
   hexagono = _player == JOGADOR
                  ? campo->hexagonos[BM_Player_getJogador()->hexagonoAtual]
@@ -183,7 +183,7 @@ void BM_Hexagono_adicionar_listener_mouse(BM_HEXAGONO *_alvo, int _acao)
 int BM_Hexagono_calcular_sincronia(BM_HEXAGONO _alvo, int _player)
 {
   int resultado = 0, i;
-  BM_Campo *campo = BM_Campo_getCampo();
+  BM_Campo *campo = bm_field_get();
   BM_HEXAGONO aux;
   for (i = 0; i < 6; i++)
   {
@@ -225,7 +225,7 @@ void BM_Hexagono_adicionar_animacao(BM_HEXAGONO *_alvo)
 
 BM_HEXAGONO *BM_Hexagono_click(int _mouseX, int _mouseY)
 {
-  BM_Campo *campo = BM_Campo_getCampo();
+  BM_Campo *campo = bm_field_get();
   BM_HEXAGONO *hexagono = NULL;
   int i, width, height;
   for (i = 0; i < campo->quantidade; i++)

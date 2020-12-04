@@ -5,14 +5,14 @@
 #include "BM_Rodadas.h"
 #include "BM_Oponente.h"
 #include "BM_Hexagono.h"
-#include "BM_Socket_events.h"
+#include "bm_socket_events.h"
 #include "BM_Communication.h"
 #include "BM_Communication_Receive.h"
 
 void BM_Communication_Receive_accept(player_message_t *server_response)
 {
   BM_Player_setId(server_response->content.player_connection_accept.id);
-  BM_Socket_events_pop(PLAYER_CONNECT_ACCEPT, BM_Communication_Receive_accept);
+  bm_socket_events_pop(PLAYER_CONNECT_ACCEPT, BM_Communication_Receive_accept);
 }
 
 void BM_Communication_Receive_opponent_move(player_message_t *server_response)
@@ -55,20 +55,20 @@ void BM_Communication_Receive_match_request(player_message_t *server_response)
     BM_Eventos_Jogo_registrar();
     BM_Campo_inicial(response.player_pos);
     BM_Oponente_set_socket(response.opponent_socket);
-    BM_Render_remover_funcao(BM_Render_esperando_oponente);
+    bm_render_remove_callback(BM_Render_esperando_oponente);
     BM_Player_iniciar_valores(response.player_pos == 1 ? 11 : 18);
     BM_Oponente_iniciar_valores(response.player_pos == 2 ? 11 : 18);
 
-    BM_Socket_events_push(PLAYER_OPPONENT_MOVE, BM_Communication_Receive_opponent_move);
-    BM_Socket_events_push(PLAYER_OPPONENT_REQUEST_BATTLE, BM_Communication_Receive_request_battle);
-    BM_Socket_events_push(PLAYER_OPPONENT_CAPTURE_HEXAGON, BM_Communication_Receive_opponent_capture);
-    BM_Socket_events_push(PLAYER_OPPONENT_TOGGLE_SINCRONIA, BM_Communication_Receive_toggle_sincronia);
+    bm_socket_events_push(PLAYER_OPPONENT_MOVE, BM_Communication_Receive_opponent_move);
+    bm_socket_events_push(PLAYER_OPPONENT_REQUEST_BATTLE, BM_Communication_Receive_request_battle);
+    bm_socket_events_push(PLAYER_OPPONENT_CAPTURE_HEXAGON, BM_Communication_Receive_opponent_capture);
+    bm_socket_events_push(PLAYER_OPPONENT_TOGGLE_SINCRONIA, BM_Communication_Receive_toggle_sincronia);
 
     if (response.player_pos == 1)
     {
       BM_Evento_Jogador_registrar();
     }
 
-    BM_Socket_events_pop(PLAYER_MATCH_RESPONSE, BM_Communication_Receive_match_request);
+    bm_socket_events_pop(PLAYER_MATCH_RESPONSE, BM_Communication_Receive_match_request);
   }
 }

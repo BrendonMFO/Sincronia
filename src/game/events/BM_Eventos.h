@@ -1,7 +1,7 @@
 #ifndef _BM_EVENTOS_
 #define _BM_EVENTOS_
 
-#include "BM_Core_Renders.h"
+#include "bm_core_render.h"
 #include "bm_allegro_events_callback.h"
 
 void BM_Eventos_Jogo_registrar();

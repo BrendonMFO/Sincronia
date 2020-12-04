@@ -1,27 +1,24 @@
 #include <stdlib.h>
+#include "bm_utils.h"
 #include "bm_allegro.h"
-#include "BM_Socket_events.h"
+#include "bm_socket_events.h"
 
 static ALLEGRO_MUTEX *sem_var;
 static communication_callback_list_t callback_list;
 
-void BM_Socket_events_init()
+void bm_socket_events_init()
 {
     callback_list.first = NULL;
     callback_list.last = NULL;
     sem_var = al_create_mutex();
 }
 
-void BM_Socket_events_push(int type, void (*callback)(player_message_t *))
+void bm_socket_events_push(int type, void (*callback)(player_message_t *))
 {
     communication_callback_t *new_callback = (communication_callback_t *)malloc(sizeof(communication_callback_t));
-    if (new_callback == NULL)
-    {
-        exit(EXIT_FAILURE);
-    }
+    bm_utils_pointer(new_callback, "Error: Could not allocate memory new_callback");
     new_callback->type = type;
     new_callback->callback = callback;
-
     al_lock_mutex(sem_var);
     if (callback_list.first == NULL && callback_list.last == NULL)
     {
@@ -39,7 +36,7 @@ void BM_Socket_events_push(int type, void (*callback)(player_message_t *))
     al_unlock_mutex(sem_var);
 }
 
-void BM_Socket_events_pop(int type, void (*callback)(player_message_t *))
+void bm_socket_events_pop(int type, void (*callback)(player_message_t *))
 {
     communication_callback_t *communication_callback;
 
@@ -86,7 +83,7 @@ void BM_Socket_events_pop(int type, void (*callback)(player_message_t *))
     al_unlock_mutex(sem_var);
 }
 
-void BM_Socket_events_call(int type, player_message_t *message)
+void bm_socket_events_call(int type, player_message_t *message)
 {
     communication_callback_t *callback;
     for (callback = callback_list.first; callback != NULL; callback = callback->next)

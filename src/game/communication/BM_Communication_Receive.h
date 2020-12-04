@@ -1,7 +1,7 @@
 #ifndef __BM_COMMUNICATION_RECEIVE__
 #define __BM_COMMUNICATION_RECEIVE__
 
-#include "BM_Socket.h"
+#include "bm_socket.h"
 
 void BM_Communication_Receive_accept(player_message_t *server_response);
 

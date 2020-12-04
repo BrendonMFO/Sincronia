@@ -10,7 +10,7 @@ static BM_Campo *campo = NULL;
 int numeroAleatorio(int _numero);
 void carregarHexagonos(BM_HEXAGONO *_hexagonos, FILE *_arquivo, int _quantidadeLinhas);
 
-BM_Campo *BM_Campo_getCampo()
+BM_Campo *bm_field_get()
 {
   if (campo == NULL)
   {
@@ -47,7 +47,7 @@ BM_Campo *BM_Campo_getCampo()
   return campo;
 }
 
-void BM_Campo_setCampo(char *_campo)
+void bm_field_set(char *_campo)
 {
   nome_campo = (char *)malloc(strlen(_campo) * sizeof(char));
   strcpy(nome_campo, _campo);

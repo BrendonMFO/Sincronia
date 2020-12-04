@@ -36,7 +36,7 @@ BM_SPRITES *BM_Recursos_obter_imagem(int _indice)
   return BM_VETOR_IMAGENS[_indice];
 }
 
-int BM_Recursos_carregar_recursos()
+int bm_resource_load()
 {
   BM_Recursos_carregar_sprite();
   BM_Recursos_carregar_fonte();
@@ -84,14 +84,14 @@ void BM_Recursos_carregar_imagens()
 BM_SPRITES *carregar_sprite(char *_arquivo, int _lines, int _columns)
 {
   BM_SPRITES *temp = (BM_SPRITES *)malloc(1 * sizeof(BM_SPRITES));
-  temp->imagem = bm_al_load_bitmap(_arquivo, _lines, _columns);
-  if (temp->imagem == NULL)
+  temp->image = bm_al_load_bitmap(_arquivo, _lines, _columns);
+  if (temp->image == NULL)
   {
     fprintf(stderr, "0 ao carregar Sprite : %s\n", _arquivo);
     return NULL;
   }
-  temp->ajusteW = ((bm_al_bitmap_width(temp->imagem->bitmap) / _columns) * bm_get_display().width) / 1600;
-  temp->ajusteH = ((bm_al_bitmap_height(temp->imagem->bitmap) / _lines) * bm_get_display().height) / 920;
+  temp->ajusteW = ((bm_al_bitmap_width(temp->image->bitmap) / _columns) * bm_get_display().width) / 1600;
+  temp->ajusteH = ((bm_al_bitmap_height(temp->image->bitmap) / _lines) * bm_get_display().height) / 920;
   return temp;
 }
 
@@ -132,7 +132,7 @@ void BM_Recursos_destruir()
   {
     if (BM_VETOR_SPRITES[i] != NULL)
     {
-      al_destroy_bitmap(BM_VETOR_SPRITES[i]->imagem->bitmap);
+      al_destroy_bitmap(BM_VETOR_SPRITES[i]->image->bitmap);
     }
   }
   for (i = 0; i < QUANTIDADE_FONTES; i++)
@@ -146,7 +146,7 @@ void BM_Recursos_destruir()
   {
     if (BM_VETOR_IMAGENS[i] != NULL)
     {
-      al_destroy_bitmap(BM_VETOR_IMAGENS[i]->imagem->bitmap);
+      al_destroy_bitmap(BM_VETOR_IMAGENS[i]->image->bitmap);
     }
   }
 }

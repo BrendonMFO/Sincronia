@@ -5,7 +5,7 @@
 #include "BM_Eventos.h"
 #include "BM_Hexagono.h"
 #include "BM_Oponente.h"
-#include "BM_Core_Eventos.h"
+#include "bm_core_events.h"
 #include "bm_allegro_main_events.h"
 
 static BM_PLAYER *ia = NULL;
@@ -13,7 +13,7 @@ static int BM_Oponente_socket;
 
 int BM_Oponente_checar_elemento();
 
-int BM_Oponente_iniciar(int _hexagonoAtual)
+int bm_oponent_init(int _hexagonoAtual)
 {
   ia = (BM_PLAYER *)malloc(sizeof(BM_PLAYER));
 
@@ -40,7 +40,7 @@ void BM_Oponente_set_socket(int socket)
 
 void BM_Oponente_capture_hexagon(int hexagon, int element)
 {
-  if (BM_Campo_getCampo()->hexagonos[ia->hexagonoAtual].estado != ADVERSARIO)
+  if (bm_field_get()->hexagonos[ia->hexagonoAtual].estado != ADVERSARIO)
   {
     ia->quantidadeTerritorio++;
   }
@@ -74,7 +74,7 @@ void BM_Oponente_iniciar_valores(int _hexagono)
   ia->elementosTempo.terra = 0;
   ia->elementosTempo.ar = 0;
   BM_Oponente_set_hexagon(_hexagono);
-  BM_Campo_getCampo()->hexagonos[_hexagono].estado = ADVERSARIO;
+  bm_field_get()->hexagonos[_hexagono].estado = ADVERSARIO;
 }
 
 int BM_Oponente_checar_elemento()
@@ -125,7 +125,7 @@ void BM_Oponente_checar_tempo()
 
 void BM_Oponente_executar_ataque(int _alvo)
 {
-  BM_Campo *campo = BM_Campo_getCampo();
+  BM_Campo *campo = bm_field_get();
   switch (BM_Hexagono_batalha(campo->hexagonos[_alvo].id, ia->hexagonoAtual, ADVERSARIO, JOGADOR))
   {
   case VITORIA_ATAQUE:

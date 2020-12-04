@@ -12,7 +12,7 @@ static long long jogador_id = 0;
 
 void BM_Player_elementos();
 
-int BM_Player_iniciar(int _hexagonoInicialJogador)
+int bm_player_init(int _hexagonoInicialJogador)
 {
   jogador = (BM_PLAYER *)malloc(1 * sizeof(BM_PLAYER));
   if (jogador == NULL)
@@ -56,7 +56,7 @@ void BM_Player_iniciar_valores(int _hexagono)
   jogador->elementosTempo.agua = 0;
   jogador->elementosTempo.terra = 0;
   jogador->elementosTempo.ar = 0;
-  BM_Campo_getCampo()->hexagonos[_hexagono].estado = JOGADOR;
+  bm_field_get()->hexagonos[_hexagono].estado = JOGADOR;
 }
 
 int BM_Player_disponibilidade_elemento(int _elemento)
@@ -113,7 +113,7 @@ void BM_Player_checar_tempo()
 
 BM_HEXAGONO *BM_Player_mover(BM_PLAYER *_player, int _mouseX, int _mouseY)
 {
-  BM_Campo *campo = BM_Campo_getCampo();
+  BM_Campo *campo = bm_field_get();
   BM_HEXAGONO *hexagono = NULL, *aux = NULL;
   int i, j, pos, width, height;
   for (i = 0; i < campo->quantidade; i++)

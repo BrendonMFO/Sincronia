@@ -3,7 +3,7 @@
 #include "BM_Eventos.h"
 #include "BM_Hexagono.h"
 #include "BM_Tutorial.h"
-#include "BM_Core_Eventos.h"
+#include "bm_core_events.h"
 #include "bm_allegro_main_events.h"
 
 void BM_Eventos_Tutorial_avancar();
@@ -32,7 +32,7 @@ void BM_Eventos_Tutorial(ALLEGRO_EVENT event, void *_parameter)
 
 void BM_Eventos_Tutorial_iniciar_jogo()
 {
-  BM_Render_remover_funcao(BM_Render_tutorial);
+  bm_render_remove_callback(BM_Render_tutorial);
   bm_events_remove_callback(BM_Eventos_Tutorial);
   BM_Eventos_Partida_procurar();
 }

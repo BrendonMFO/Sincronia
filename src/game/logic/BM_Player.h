@@ -12,7 +12,7 @@ typedef struct BM_PLAYER_S
   BM_ELEMENTOS elementosTempo;
 } BM_PLAYER;
 
-int BM_Player_iniciar(int _hexagonoInicialJogador);
+int bm_player_init(int _hexagonoInicialJogador);
 
 BM_HEXAGONO *BM_Player_mover(BM_PLAYER *_player, int _mouseX, int _mouseY);
 

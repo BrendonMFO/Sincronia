@@ -1,7 +1,7 @@
-#include "BM_Core_Carregar.h"
 #include "bm_display.h"
+#include "bm_core_load.h"
 #include "bm_allegro_bitmap.h"
-#include "BM_Core_Loop_principal.h"
+#include "bm_core_loop.h"
 
 int main(int argc, char *argv[])
 {
@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
   }
   bm_display_init(width, height);
 
-  if (BM_Core_carregar(janela) == 0)
+  if (bm_core_load(janela) == 0)
   {
     getchar();
     return -1;
@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
   bm_al_events_init(janela);
   al_clear_to_color(al_map_rgb(255, 255, 255));
 
-  BM_Loop(janela);
+  bm_loop(janela);
 
   BM_Recursos_destruir();
   al_destroy_display(janela);

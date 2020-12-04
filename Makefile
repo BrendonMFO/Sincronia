@@ -1,4 +1,5 @@
-IP_SERVER="172.18.0.6"
+IP_SERVER="172.18.0.7"
+IP_PORT=4080
 
 #=====================================================================
 # Color
@@ -17,7 +18,7 @@ INCLUDES_GAME = -I./src/game/events -I./src/game/logic -I./src/game/renders -I./
 INCLUDES = $(INCLUDES_GAME) $(INCLUDES_ENGINE)
 ALLEGRO = -lallegro_image -lallegro_ttf -lallegro_font -lallegro_primitives -lallegro
 LIBS = -L./build -lbm_engine -lbm_game
-CFLAGS = -DIP_SERVER='$(IP_SERVER)'
+CFLAGS = -DIP_SERVER='$(IP_SERVER)' -DPORT='${IP_PORT}'
 
 #=====================================================================
 # Init

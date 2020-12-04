@@ -17,7 +17,7 @@ ALLEGRO_FONT *BM_Recursos_obter_fonte(int _indice);
 
 BM_SPRITES *BM_Recursos_obter_imagem(int _indice);
 
-int BM_Recursos_carregar_recursos();
+int bm_resource_load();
 
 void BM_Recursos_destruir();
 

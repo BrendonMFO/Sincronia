@@ -1,7 +1,7 @@
 #ifndef __BM_COMMUNICATION_SEND__
 #define __BM_COMMUNICATION_SEND__
 
-#include "BM_Socket_structs.h"
+#include "bm_socket_structs.h"
 
 void BM_Communication_Send_connection(char *name);
 

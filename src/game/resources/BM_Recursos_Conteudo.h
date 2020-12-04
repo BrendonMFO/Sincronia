@@ -3,11 +3,11 @@
 
 #include "bm_allegro_bitmap.h"
 
-#define Imagem imagem->bitmap
+#define Imagem image->bitmap
 
 typedef struct BM_SPRITES_S
 {
-  BM_ALLEGRO_BITMAP *imagem;
+  BM_ALLEGRO_BITMAP *image;
   int ajusteW;
   int ajusteH;
 } BM_SPRITES;

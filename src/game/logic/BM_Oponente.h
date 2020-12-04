@@ -4,7 +4,7 @@
 #include "BM_Player.h"
 #include "BM_Hexagono.h"
 
-int BM_Oponente_iniciar(int _hexagonoAtual);
+int bm_oponent_init(int _hexagonoAtual);
 
 void BM_Oponente_iniciar_valores(int _hexagono);
 

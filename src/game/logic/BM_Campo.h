@@ -11,9 +11,9 @@ typedef struct BM_Campo_S
   BM_HEXAGONO *hexagonos;
 } BM_Campo;
 
-BM_Campo *BM_Campo_getCampo();
+BM_Campo *bm_field_get();
 
-void BM_Campo_setCampo(char *_campo);
+void bm_field_set(char *_campo);
 
 void BM_Campo_redefinir();
 

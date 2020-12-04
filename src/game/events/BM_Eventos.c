@@ -1,7 +1,7 @@
 #include "BM_Render.h"
 #include "BM_Eventos.h"
 #include "BM_Communication_Send.h"
-#include "BM_Core_Loop_principal.h"
+#include "bm_core_loop.h"
 
 void BM_Core_Evento_inicial()
 {
